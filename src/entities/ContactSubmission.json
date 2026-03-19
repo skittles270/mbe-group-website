@@ -1,0 +1,27 @@
+{
+  "name": "ContactSubmission",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Customer name"
+    },
+    "email": {
+      "type": "string",
+      "description": "Customer email"
+    },
+    "company": {
+      "type": "string",
+      "description": "Customer company"
+    },
+    "message": {
+      "type": "string",
+      "description": "Contact message"
+    }
+  },
+  "required": [
+    "name",
+    "email",
+    "message"
+  ]
+}
