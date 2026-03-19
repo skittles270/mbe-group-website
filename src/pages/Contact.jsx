@@ -7,7 +7,6 @@ import { Label } from '@/components/ui/label';
 import { motion } from 'framer-motion';
 import { Send, Mail, MapPin, Clock } from 'lucide-react';
 import { toast } from 'sonner';
-import { base44 } from '@/api/base44Client';
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -18,7 +17,12 @@ export default function Contact() {
     e.preventDefault();
     setSending(true);
     try {
-      await base44.functions.invoke('sendContactEmail', form);
+      const res = await fetch('/api/sendContactEmail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error('Failed');
       toast.success(t.contact.success);
       setForm({ name: '', email: '', company: '', message: '' });
     } catch (error) {
